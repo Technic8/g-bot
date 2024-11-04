@@ -12,13 +12,13 @@ Note: G-Bot has nothing affiliated with any company. I called it G-bot just caus
 - Automatic reply to certain keywords with a funny gif
 
 ## Commands
-- chaosmode  Turns chaos mode on or off.
-- help       Shows this message
-- magic8ball Gives you a random answer to any prompt
-- mashup     Combines 2 emojis into one new emoji using Google's Emoji Kitchen.
-- rate       Rates anything on a scale from 1 to 10.
-- repeat     Makes the bot repeat your message.
-- talkingben Ask Talking Ben anything!
-- uwuify     Turns your message into an abomination.
-- vodkatype  Turn your message into a horrific mess.
-- wanted     Puts any user's pfp onto a wanted poster.
+- `!chaosmode`  Turns chaos mode on or off.
+- `!help`       Shows this message
+- `!magic8ball` Gives you a random answer to any prompt
+- `!mashup`     Combines 2 emojis into one new emoji using Google's Emoji Kitchen.
+- `!rate`       Rates anything on a scale from 1 to 10.
+- `!repeat`     Makes the bot repeat your message.
+- `!talkingben` Ask Talking Ben anything!
+- `!uwuify`     Turns your message into an abomination.
+- `!vodkatype`  Turn your message into a horrific mess.
+- `!wanted`     Puts any user's pfp onto a wanted poster.
