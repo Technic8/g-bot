@@ -26,3 +26,4 @@ A few notes:
 - `!uwuify`     Turns your message into an abomination.
 - `!vodkatype`  Turn your message into a horrific mess.
 - `!wanted`     Puts any user's pfp onto a wanted poster.
+- `!finalgrade` Prompts the user for their current grade for a course, their desired grade from that course, and the final weight to give a final exam grade prediction for them.
