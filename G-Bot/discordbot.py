@@ -280,6 +280,91 @@ async def magic8ball(ctx):
 
     await ctx.send(messages[num])
 
+@bot.command(brief="Gives you a final score needed to achieve a certain grade from a course.", description="Gives you a final score needed to achieve a certain grade from a course. \n Usage: !finalgrade")
+async def finalgrade(ctx):
+    calculator_contents = []
 
+    prompts = [
+        "Please enter your current grade (0-100 grading scale) in your course.",
+        "Please enter the grade you want to achieve (0-100 grading scale) from this course.",
+        "Please enter the weight of the final (0-100%)."
+    ]
+
+    passed_arg = False
+    cancelled = False
+    for i in range(len(prompts)):
+        if not cancelled:
+            await ctx.send(f"{ctx.author.mention} {prompts[i]} Type \"cancel\" at any time to cancel this command.")
+            passed_arg = False
+            while not passed_arg:
+                try:
+                    arg = await bot.wait_for("message", check=lambda m: m.author.id == ctx.author.id, timeout=60.0)
+                    arg = arg.content
+                    if arg == "cancel":
+                        await ctx.send("Command cancelled by user.")
+                        cancelled = True
+                        break
+                    try:
+                        calculator_contents.append(float(arg))
+                    except ValueError:
+                        await ctx.send("Invalid argument, please try again.")
+                    passed_arg = True
+                except asyncio.TimeoutError:
+                    await ctx.send("Command cancelled due to user inaction.")
+                    cancelled = True
+                    break
+
+    ez_final_messages = [
+        "We chillin' with this one!",
+        "Don't bother studying.",
+        "Honestly, don't panic. You're in a really good place!",
+        "You got this easy.",
+        "You could probably sleepwalk through this final.",
+        "I mean COME ON! You could take this exam blindfolded and still pass your class. Bruh!"
+    ]
+
+    grindtime_final_messages = [
+        "Get to it then!",
+        "Gotta lock in for this one...",
+        "It's grind time, boys.",
+        "Throw away your phone, you won't need it.",
+        "Night time study session, anyone?",
+        "With great preparation, you can achieve this.",
+        "GL, m8.",
+        "You got this."
+    ]
+
+    cooked_final_messages = [
+        "Idk m8, you seem cooked for this final.",
+        "Think realistically, could you settle with a lower grade from this course?",
+        "Honestly, no one's gonna ask you about how you did on your final 30 years from now, right?",
+        "WE RETAKIN THE COURSE WITH THIS ONE 🗣️🔥🔥🔥",
+        "Not even Gongaga can save you here...",
+        "Perhaps build a time machine instead?"
+    ]
+    
+    
+    if len(calculator_contents) == 3:
+        current_grade = calculator_contents[0]
+        desired_grade = calculator_contents[1]
+        final_weight = calculator_contents[2]
+        if (current_grade >= 0 and current_grade <= 120) and (desired_grade >= 0 and desired_grade <= 120) and (final_weight > 0 and final_weight <= 100):
+
+            final_grade = (desired_grade - current_grade * (1 - (final_weight/100))) / (final_weight/100)
+            final_grade = round(final_grade, 2)
+
+
+            msg = ""
+            if final_grade > 100:
+                msg = cooked_final_messages[random.randint(0, len(cooked_final_messages))]
+            elif final_grade > 50:
+                msg = grindtime_final_messages[random.randint(0, len(grindtime_final_messages))]
+            else:
+                msg = ez_final_messages[random.randint(0, len(ez_final_messages))]
+            
+            await ctx.send(f"You need a {final_grade} on your final to get a {desired_grade} in your class. {msg}")
+
+        else:
+            await ctx.send("https://tenor.com/view/thanos-impossible-cant-believe-gif-14748764")
 
 bot.run(TOKEN)
